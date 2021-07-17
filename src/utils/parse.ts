@@ -1,5 +1,5 @@
 import { getToken } from "./getToken";
-import { NodeType } from "../type/interface";
+import { Nodes, NodeType, Tokens } from "../type/interface";
 
 export const getVariable = (words:string) => {
     const variableDel = words.split(':');
@@ -88,3 +88,33 @@ export const getComment = (lines: string[],lineIndex:number,words:string) => {
     }
     return false;
 }
+
+// 变量替换
+export const parse = (tokens: Tokens)=> {
+    const {dels, nodes} = tokens || {};
+    const variableMap = dels?.reduce((variableMap, {prop, value}) => {
+        variableMap[prop] = value;
+        return variableMap;
+    }, {} as {[key: string]:any}) || {};
+
+    parseNode(nodes, variableMap);
+
+    tokens.dels = null;
+    return {...tokens, type: 'root' as NodeType, value: '', prop: ''};
+} 
+
+const parseNode = (nodes: Nodes[] | null, variableMap: {[key:string]:any}) => {
+    if(!nodes?.length) return;
+    nodes.map((node) => {
+        node.dels?.map(del => {
+            const {value} = del;
+            // value 可能是单个值: @color，也可能是多个值 1px solid @color;
+            const variableName = value.match(/@(.*?)(\s|$)/g)?.[0];
+            if(variableName && variableName in variableMap) {
+                del.value = del.value.replace(variableName, variableMap[variableName]);
+            }
+        });
+
+        parseNode(node.nodes, variableMap);
+    })
+} 

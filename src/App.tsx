@@ -1,11 +1,18 @@
 
-import './App.css';
+import simless from './utils';
+import { lessStr } from "./test/index";
 
 function App() {
+  
   return (
-    <div className="App">
-      111
-    </div>
+    <>
+    <h2>转化前样式</h2>
+    <pre>{lessStr}</pre>
+    <h2>转化后样式</h2>
+    <pre>
+      {simless(lessStr)}
+    </pre>
+    </>
   );
 }
 
