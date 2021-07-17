@@ -20,7 +20,7 @@ export const getToken = (source: string) => {
         // 变量
         const variableDel = getVariable(effectiveWords);
         if(variableDel) {
-            tokens['dels']?.push(variableDel)
+            tokens['dels']?.push(variableDel);
         }
         else {
         // 属性
@@ -35,7 +35,7 @@ export const getToken = (source: string) => {
             if(selectorDel) {
                 const {del,line} = selectorDel;
                 currentParseLine = line;
-                tokens['nodes'].push(del)
+                tokens['nodes'].push(del);
             }
             else {
                 const commentDel = getComment(lines, i, effectiveWords);
@@ -48,6 +48,6 @@ export const getToken = (source: string) => {
         }
         currentParseLine++;
     }
-    return {tokens, line: currentParseLine}
+    return {tokens, line: currentParseLine};
 }
 

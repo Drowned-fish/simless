@@ -46,7 +46,7 @@ export const getSelector = (lines: string[],lineIndex:number,words:string) => {
             }
         }
     }
-    return false
+    return false;
 }
 
 export const getComment = (lines: string[],lineIndex:number,words:string) => {
@@ -86,5 +86,5 @@ export const getComment = (lines: string[],lineIndex:number,words:string) => {
             }
         }
     }
-    return false
+    return false;
 }
