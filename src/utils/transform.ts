@@ -3,7 +3,7 @@ import { Nodes, TransForm } from "../type/interface";
 export const transform = (ast: Nodes) => {
     let transformRes: TransForm[] = [];
     const traverse = (astNode: Nodes,result: TransForm[],selectorPrefix:string) => {
-        let selector = '';
+        let selector = '    ';
         if(astNode.type === 'selector') {
             let astNodeValue = astNode.value.trim();
             if(astNodeValue.startsWith('&')) {

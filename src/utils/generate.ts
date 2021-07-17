@@ -8,7 +8,7 @@ export const generate = (ast:TransForm[]) => {
         else if(selector && dels) {
             cssArr.push(selector + " {");
             cssArr.push(dels.map((del) => ` ${del.prop}: ${del.value};`).join('\n'));
-            cssArr.push('}');
+            cssArr.push('   }');
         }
 
         return cssArr;

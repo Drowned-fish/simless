@@ -21,7 +21,7 @@ export const getProperty = (words:string) => {
             const [prop, value] = propertyDel;
             return {
                 type: 'property',
-                prop,
+                prop: `     ${prop}`,
                 value: value.trim().slice(0, -1)
             }
         }
